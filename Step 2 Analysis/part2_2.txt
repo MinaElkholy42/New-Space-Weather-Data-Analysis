@@ -1,0 +1,29 @@
+import re
+best_matching = pd.DataFrame(columns=temp_second_table.columns)
+rank = []
+
+for index_second, row_second in second_table.iterrows():
+    for index_first, row_first in first_table.iterrows():
+        flag = False
+        class_imp = str(row_first['x_class'])
+        if '+' in class_imp:
+            class_imp = class_imp[:-1]
+            
+        data_2 = re.split('/| ',row_second['Start_DateTime'])
+        data_2 = data_2[0:3]
+        
+        data_1 = re.split('-| ',str(row_first['start_time']))
+        data_1 = data_1[0:3]
+        
+        if row_second['Importance'] == class_imp and data_2 == data_1:
+            best_matching.loc[len(best_matching)] = second_table.loc[index_second].tolist()
+            flag = True
+    if flag == True:
+        rank.append("Ture")
+    else:
+        rank.append("False")
+second_table['rank'] = rank
+
+
+
+print(best_matching)

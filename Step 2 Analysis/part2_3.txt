@@ -1,0 +1,26 @@
+#Ploting
+import matplotlib.pyplot as plt
+
+start_Frequancy = top_50['Start_Frequancy'].tolist()
+for n, i in enumerate(start_Frequancy):
+    if '?' in i:
+        start_Frequancy[n] = '0'
+    start_Frequancy[n] = int(start_Frequancy[n])
+    
+width = top_50['Width'].tolist()
+for n, i in enumerate(width):
+    if '-' in i:
+        width[n] = '0'
+    if 'h' in i:
+        width[n] = width[n][:-1]
+    width[n] = int(width[n])
+
+plt.scatter(start_Frequancy, width, label='Start Frequancy vs width')
+# plt.plot(start_Frequancy,width,markevery=mark, ls="", marker="o", label="points")
+
+# fig, ax = plt.subplots()
+# ax.scatter(start_Frequancy, width)
+
+# for i, txt in enumerate(mark):
+#     plt.scatter(start_Frequancy[mark[i]], width[mark[i]], color='r')
+plt.show()
